@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+<%= render @subreddit %>
+<% if current_user && current_user.memberships.exists?(subreddit_id: @subreddit.id) %>
+  <p>You're a member</p>
+  <%= form_with(model: current_user.memberships.find_by(subreddit_id: @subreddit.id), method: :delete, local: true, style: "margin: 0;") do |form| %>
+    <%= form.submit "Leave", class: "btn btn-danger" %>
+  <% end %>
+<% else %>
+  <%= render partial: "memberships/form", locals: { membership: @membership } %>
+<% end %>
+<% if current_user && current_user.id == @subreddit.user_id %>
+  <div>
+    <%= link_to "Edit this subreddit", edit_subreddit_path(@subreddit) %>
+    <%= button_to "Destroy this subreddit", @subreddit, method: :delete %>
+  </div>
+<% end %>
+<%= link_to "New Post", new_post_path(subreddit_id: @subreddit.id) %>
+<%= render @posts %>

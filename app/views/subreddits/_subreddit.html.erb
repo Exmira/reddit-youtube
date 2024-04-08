@@ -1,0 +1,10 @@
+<%= link_to subreddit do %>
+  <div id="<%= dom_id subreddit %>">
+    <h3>
+      R/<%= subreddit.title %>
+    </h3>
+    <p>
+      <%= subreddit.body %>
+    </p>
+  </div>
+<% end %>

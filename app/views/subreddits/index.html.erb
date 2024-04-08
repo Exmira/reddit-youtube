@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+<h1> Search for a subreddit </h1>
+<%= form_with url: search_subreddits_path, method: :post do |form| %>
+  <%= form.search_field :title_search, oninput: "this.form.requestSubmit()", style:"width: 100%;" %>
+<% end %>
+<div id="search_results">
+  Search Results
+</div>
+<div id="subreddits">
+  <% @subreddits.each do |subreddit| %>
+    <%= render subreddit %>
+    <p>
+    </p>
+  <% end %>
+</div>
+<%= link_to "New subreddit", new_subreddit_path %>

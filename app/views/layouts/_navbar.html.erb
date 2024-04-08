@@ -1,0 +1,19 @@
+<%= stylesheet_link_tag "navbar" %>
+<div class="navbar">
+  <div class="navbar-brand">
+    <%#= link_to image_tag("logo.png", alt: "Logo", style: "width: 40px; color:green;"), home_index_path %>
+  </div>
+  <div class="navbar-links">
+    <%= link_to "Home", subreddits_path, class:"nav-link" %>
+    <% if user_signed_in? %>
+      <div class="navbar-user">
+        <%= link_to "My subreddits", my_subreddits_path, class: "nav-link" %>
+        <%#= link_to "My Account", edit_user_registration_path, class:"nav-link"%>
+        <%= link_to "Sign out", destroy_user_session_path,class:"nav-link", data: { turbo_method: :delete }%>
+      <% else %>
+        <div class="navbar-auth">
+          <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+          <%= link_to "Log in", new_user_session_path, class: "nav-link "%>
+        <% end %>
+      </div>
+    </div>

@@ -1,0 +1,14 @@
+<% if @user_memberships.count > 0 %>
+  <aside>
+    <h2>My Subreddits</h2>
+    <ul>
+      <% @user_memberships.each do |membership| %>
+        <% subreddit = membership.subreddit %>
+        <% if subreddit.present? %>
+          <li><%= link_to subreddit.title, subreddit %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </aside>
+<% end %>
+<%= link_to "New subreddit", new_subreddit_path %>

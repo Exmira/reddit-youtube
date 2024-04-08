@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+<%= render @post %>
+<% if current_user %>
+  <%= form_with(model: [@post, @vote], url: upvote_post_path, method: :post, id: "up-vote-form") do |form| %>
+    <%= form.number_field :value, value: 1, type:"hidden" %>
+    <%= form.submit "Upvote"%>
+  <% end %>
+  <%= form_with(model: [@post, @vote], url: downvote_post_path, method: :post, id: "down-vote-form") do |form| %>
+    <%= form.number_field :value, value: -1, type:"hidden"%>
+    <%= form.submit "downvote "%>
+  <% end %>
+  <%= form_with(model: [@post, @comment], url: create_comment_post_path, method: :post, id: "post-form") do |form| %>
+    <h2> New comment </h2>
+    <%= form.text_field :content %>
+    <%= form.submit %>
+  <% end %>
+<% end %>
+<h3> Comments </h3>
+<%= render @comments %>
+<% if current_user && current_user.id == @post.user_id %>
+  <div>
+    <%= link_to "Edit this post", edit_post_path(@post) %>
+    <%= button_to "Destroy this post", @post, method: :delete %>
+  </div>
+<% end %>

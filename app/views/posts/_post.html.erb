@@ -1,0 +1,21 @@
+<%= link_to post do %>
+  <div id="<%= dom_id post %>" class="post-container" style="text-align:center;">
+    <h2>
+      <%= post.title %>
+      (<%= post.total_score %>)
+    </h2>
+    <p>
+      <%= post.body %>
+    </p>
+    <% if post.image.present? %>
+      <%= image_tag post.image, class:"post-image" %>
+    <% end %>
+  </div>
+<% end %>
+<style>
+  .post-image
+  {
+  max-width: 100%;
+  height: auto;
+  }
+</style>
